@@ -10,11 +10,12 @@
 # Ejercicios con archivos
 
 import csv
+from os import close
 
 
 def ej3():
     print('Ejercicio de archivos CSV 1º')
-    archivo = 'stock.csv'
+    archivo = open ('stock.csv')
     
     # Realice un programa que abra el archivo 'stock.csv'
     # en modo lectura y cuente el stock total de tornillos
@@ -28,7 +29,22 @@ def ej3():
 
     # Comenzar aquí, recuerde el identado dentro de esta funcion
     
+    archivo_1 = list(csv.DictReader(archivo))
+    archivo.close()
 
+    cantidad= len(archivo_1)
+    for i in range (cantidad):
+        row = archivo_1[i]
+       
+        try:
+            tornillos = float(row.get('tornillos'))
+            print('Fila', i, 'dato tornillos:', tornillos)
+        except:
+            print('Error Fila', i, 'dato tornillo faltante')
+    
+    return
+
+    
 
 def ej4():
     print('Ejercicios con archivos CSV 2º')
@@ -48,6 +64,30 @@ def ej4():
 
     # Comenzar aquí, recuerde el identado dentro de esta funcion
 
+    csvfile = open('propiedades.csv')
+    propiedades = list(csv.DictReader(csvfile))
+    csvfile.close()
+
+    i = 0
+    dpto_dos_ambientes = 0
+    dpto_tres_ambientes = 0
+
+    for fila in propiedades:
+        try:
+            ambientes = int(fila['ambientes'])
+        except:
+            print('El valor de la fila,', i, 'no existe')
+        i += 1
+
+        if ambientes == 2:
+            dpto_dos_ambientes += 1
+        elif ambientes == 3:
+            dpto_tres_ambientes += 1
+
+    print('La cantidad de departamentos de 2 ambientes disponible es:', dpto_dos_ambientes)
+    print('La cantidad de departamentos de 3 ambientes disponible es:', dpto_tres_ambientes)
+            
+    return
 
 if __name__ == '__main__':
     print("Bienvenidos a otra clase de Inove con Python")
