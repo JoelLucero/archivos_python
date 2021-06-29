@@ -74,7 +74,7 @@ def ej2():
         "Ingrese FIN para salir\n")
         pregunta = str(input())
         
-        if pregunta == "FIN" or pregunta =="fin":
+        if pregunta.lower() == "fin":
             print("Adios")
             break
           
